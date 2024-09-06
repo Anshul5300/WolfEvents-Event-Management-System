@@ -1,0 +1,11 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @review %>
+
+<div class="form-group">
+  <%= link_to "Edit this Review", edit_review_path(@review) %> |
+  <%= link_to "Back to Reviews", reviews_path %> |
+  <%= link_to "Back to Home Page", home_index_path %>
+
+  <%= button_to "Delete this review", @review, method: :delete %>
+</div>

@@ -1,0 +1,34 @@
+<h1>Rooms</h1>
+<% if current_user.present? && current_user.role == 'admin' %>
+  <%= link_to "New Room", new_room_path %>
+<% end %>
+
+<table class="table table-striped">
+  <thead>
+  <tr>
+    <th scope="col">#</th>
+    <th scope="col">Room Id</th>
+    <th scope="col">Location</th>
+    <th scope="col">Capacity</th>
+    <% if current_user.role == "admin" %>
+    <th scope="col">Edit</th>
+    <th scope="col">Delete</th>
+    <% end %>
+  </tr>
+  </thead>
+
+  <tbody>
+  <% @rooms.each do |room| %>
+    <tr>
+    <td class="align-middle"><%= room.id %></td>
+      <td class="align-middle"><%= room.room_id %></td>
+    <td class="align-middle"><%= room.location %></td>
+    <td class="align-middle"><%= room.capacity %></td>
+      <% if current_user.role == "admin" %>
+    <td class="align-middle"><%= link_to 'Edit', edit_room_path(room.id) %></td>
+    <td class="align-middle"><%= button_to "Delete", room, method: :delete , class:"btn btn-danger"%></td>
+     <% end %>
+  <% end %>
+  </tr>
+  </tbody>
+</table>

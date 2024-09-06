@@ -1,0 +1,19 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  category: MyString
+  date: MyString
+  start_time: 2024-02-23 16:34:32
+  end_time: 2024-02-23 16:34:32
+  price: 1.5
+  seats_left: 1
+
+two:
+  name: MyString
+  category: MyString
+  date: MyString
+  start_time: 2024-02-23 16:34:32
+  end_time: 2024-02-23 16:34:32
+  price: 1.5
+  seats_left: 1

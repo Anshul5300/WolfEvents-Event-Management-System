@@ -1,0 +1,15 @@
+one:
+  user: one
+  event: one
+  room: one
+  confirmation_number: 'MyString'
+  quantity: 1
+  total_cost: 100.0
+
+two:
+  user: two
+  event: two
+  room: two
+  confirmation_number: 'MyString'
+  quantity: 2
+  total_cost: 200.0

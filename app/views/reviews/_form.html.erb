@@ -1,0 +1,44 @@
+<%= form_with(model: review) do |form| %>
+  <% if review.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(review.errors.count, "error") %> prohibited this review from being saved:</h2>
+
+      <ul>
+        <% review.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+
+
+
+  <div class="form-group">
+    <%= form.label :event_id, style: "display: block" %>
+    <% if current_user.role == "admin" %>
+      <%= form.collection_select :event_id, current_user.events.where("date < ? OR (date = ? AND (end_time < ? OR (end_time = ? AND end_time < ?)))", Date.current, Date.current, Date.current, Time.current.strftime('%H:%M:%S'), Time.current.strftime('%H:%M:%S')).distinct, :id, :name, prompt: 'Please select' , required: true %>
+    <% else %>
+      <%= form.collection_select :event_id, current_user.events.where("date < ? OR (date = ? AND (end_time < ? OR (end_time = ? AND end_time < ?)))", Date.current, Date.current, Date.current, Time.current.strftime('%H:%M:%S'), Time.current.strftime('%H:%M:%S')).where.not(category: ['Miscellaneous', 'Private']).distinct, :id, :name, prompt: 'Please select' , required: true %>
+    <% end %>
+  </div>
+
+
+  <div class="form-group">
+    <%= form.label :rating, style: "display: block" %>
+    <div class="input-group">
+    <%= form.select :rating, options_for_select((1..5).map { |number| [number, number] }), required: true %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :feedback, style: "display: block" %>
+    <%= form.text_area :feedback , required: true%>
+  </div>
+
+
+
+  <div class="form-group">
+    <%= form.submit class:"btn btn-primary" %>
+  </div>
+<% end %>

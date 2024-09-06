@@ -1,0 +1,137 @@
+
+<%= form_with(model: event) do |form| %>
+  <% if event.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(event.errors.count, "error") %> prohibited this event from being saved:</h2>
+
+      <ul>
+        <% event.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <%= form.label :name, style: "display: block" %>
+    <%= form.text_field :name, class:"form-control", required: true %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :category, style: "display: block" %>
+    <div class="input-group">
+      <%= form.select :category, options_for_select(["Concerts", "Sports", "Arts & Theatre", "Miscellaneous/Family – Private"]), { prompt: "Choose...", required: true }, { class: "custom-select" } %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :date, style: "display: block" %>
+    <%= form.date_field :date, class:"form-control", required: true %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :start_time, style: "display: block" %>
+    <%= form.time_field :start_time, class:"form-control", required: true %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :end_time, style: "display: block" %>
+    <%= form.time_field :end_time, class:"form-control", required: true %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :price, style: "display: block" %>
+    <%= form.text_field :price, class:"form-control", required: true %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :seats_left, style: "display: block" %>
+    <%= form.number_field :seats_left, class:"form-control", required: true %>
+  </div>
+
+<!--  <div class="form-group">-->
+    <%#= form.label :room_id, style: "display: block" %>
+    <%#= form.number_field :room_id, class:"form-control", required: true %>
+<!--  </div>-->
+
+  <div class="form-group">
+    <%= form.label :room_id, style: "display: block" %>
+    <div class="input-group">
+      <%= form.select :room_id, options_for_select([]), { prompt: "Choose...", required: true }, { class: "custom-select" } %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= form.submit class:"btn btn-primary" %>
+  </div>
+<% end %>
+
+<script>
+
+  function getTime(date) {
+      const time = new Date(date).toLocaleTimeString('en',
+          { timeStyle: 'short', hour12: false, timeZone: 'UTC' });
+      return time;
+  }
+
+
+    document.getElementById("event_room_id").addEventListener('click', function() {
+        let date = document.getElementById('event_date').value;
+        let startTime = document.getElementById('event_start_time').value;
+        let endTime = document.getElementById('event_end_time').value;
+        fetch('/events.json')
+            .then(response => response.json())
+            .then(data => {
+                let eventArray = [];
+                Promise.all(data.map(event => fetch('/events/' + event.id)))
+                    .then(responses => Promise.all(responses.map(response => response.json())))
+                    .then(events => {
+                        events.forEach(event => {
+                            console.log(event.date == date)
+                            if (event.date == date) {
+                                if (getTime(event.start_time) <= endTime && getTime(event.end_time) >= endTime) {
+                                    eventArray.push(event.room_id);
+                                } else if (getTime(event.start_time) <= startTime && getTime(event.end_time) <= startTime) {
+                                    eventArray.push(event.room_id);
+                                } else if (getTime(event.start_time) <= startTime && getTime(event.end_time) >= endTime) {
+                                    eventArray.push(event.room_id);
+                                }
+                            }
+                        });
+                        console.log(eventArray)
+                        fetch('/rooms.json')
+                            .then(response => response.json())
+                            .then(data => {
+                                document.getElementById('event_room_id').innerHTML = '';
+                                // Assuming data is an array of room objects
+                                data.forEach(room => {
+                                    // Assuming you have a select dropdown with id 'event_room_id'
+                                    if (!eventArray.includes(room.id)) {
+                                        var option = document.createElement('option');
+                                        option.value = room.id;
+                                        option.text = room.room_id; // Adjust this according to your room object
+                                        document.getElementById('event_room_id').appendChild(option);
+                                    }
+                                });
+                            }).catch(error => {
+                            console.error('Error fetching rooms:', error);
+                        });
+                    });
+            });
+    });
+
+  document.getElementById("event_room_id").addEventListener('input', function() {
+      let room_id = document.getElementById('event_room_id').value;
+      let seats_left = document.getElementById('event_seats_left').value;
+      fetch('/rooms.json')
+          .then(response => response.json())
+          .then(data => {
+              let rooms = data;
+              const room_found = rooms.find(room => room.id === parseInt(room_id));
+              if(room_found.capacity < seats_left){
+                  alert("Seats left cannot be greater than Room Capacity");
+                  window.location.reload();
+              }
+          });
+  });
+</script>

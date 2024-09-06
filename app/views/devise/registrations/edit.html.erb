@@ -1,0 +1,108 @@
+<div class="card">
+  <div class="card-header">
+    <h4>Edit Profile <% resource_name.to_s.humanize %></h4>
+  </div>
+  <div class="card-body">
+
+    <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+      <%= render "devise/shared/error_messages", resource: resource %>
+      <div class="field form-group">
+        <h7>Name</h7>
+        <%= f.text_field :name, autofocus: true, autocomplete: "name", class:"form-control", placeholder:"Name" %>
+      </div>
+
+      <% if current_user.role != "admin" %>
+
+      <div class="field form-group">
+        <h7>Email</h7>
+        <%= f.email_field :email, autofocus: true, autocomplete: "email", class:"form-control", placeholder:"Email" %>
+      </div>
+
+        <% end %>
+
+      <div class="field form-group">
+        <h7>Phone Number</h7>
+        <%= f.text_field :phone_number, autofocus: true, autocomplete: "phone number", class:"form-control", placeholder:"Phone Number", pattern:"[1-9]{1}[0-9]{9}", title: "Please enter a 10-digit phone number" %>
+      </div>
+
+      <div class="field form-group">
+        <h7>Address</h7>
+        <%= f.text_field :address, autofocus: true, autocomplete: "address", class:"form-control", placeholder:"Address" %>
+      </div>
+
+      <div class="field form-group">
+        <h7>Card Number</h7>
+        <%= f.text_field :card, autofocus: true, autocomplete: "card", class:"form-control", placeholder:"Card Number", pattern: "[0-9]{16}", title: "Please enter a 16-digit card number" %>
+      </div>
+
+      <div class="field form-group">
+        <h7>Expiry Date</h7>
+        <%= f.text_field :expiry, autofocus: true, autocomplete: "expiry", class:"form-control", placeholder:"Expiry Date" %>
+      </div>
+
+      <div class="field form-group">
+        <h7>CVV</h7>
+        <%= f.text_field :cvv, autofocus: true, autocomplete: "cvv", class:"form-control", placeholder:"CVV", pattern: "[0-9]{3}", title: "Please enter a 3-digit CVV" %>
+      </div>
+
+      <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+        <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
+      <% end %>
+
+      <% if current_user.role != "admin" %>
+
+      <div class="field form-group">
+        <h7>Password <i>(Leave blank if you don't want to change it)</i></h7>
+        <%= f.password_field :password, autocomplete: "new-password", class:"form-control", placeholder:"Password" %>
+        <% if @minimum_password_length %>
+
+          <em><%= @minimum_password_length %> characters minimum</em>
+        <% end %>
+      </div>
+
+      <div class="field form-group">
+        <h7>Confirm Password</h7>
+        <%= f.password_field :password_confirmation, autocomplete: "new-password", class:"form-control", placeholder:"Password" %>
+      </div>
+
+      <% end %>
+
+      <%# if current_user.role == nil %>
+<!--        <div class="field form-group">-->
+          <%#= f.text_field :role, autofocus: true, autocomplete: "role", value: "admin", class:"form-control", type: :hidden %>
+<!--        </div>-->
+      <%# end %>
+
+      <div class="field form-group">
+        <h7>Current Password <i>(To make any changes)</i></h7>
+        <%= f.password_field :current_password, autocomplete: "current-password", class:"form-control", placeholder:"Current Password" %>
+      </div>
+      <br/>
+      <div class="actions">
+        <%= f.submit "Update", class:'btn btn-secondary' %>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+
+
+<br/><br/>
+<% if current_user.role != "admin" %>
+  <div class="card">
+    <div class="card-header">
+      <h4>Cancel my account</h4>
+    </div>
+    <div class="card-body">
+      <h5 class="card-title">Unhappy?</h5>
+      <p class="card-text"><%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete, class:'btn btn-danger' %></p>
+    </div>
+  </div>
+<% end %>
+
+
+
+
+<br/>
+
+<%= link_to "Back", :back %>

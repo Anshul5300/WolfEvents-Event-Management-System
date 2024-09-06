@@ -1,0 +1,50 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Reviews</h1>
+
+<% if current_user.role == 'admin' %>
+  <h4>Find Reviews by User Name</h4>
+  <%= form_tag(reviews_path, method: :get) do %>
+    <div class="form-group">
+      <%= text_field_tag :user_name, params[:search], placeholder: "Search Reviews by User Name", class: "form-control" %>
+    </div>
+    <h4>Find Reviews by Event Name</h4>
+    <div class="form-group">
+      <%= text_field_tag :event_name, params[:search], placeholder: "Search Reviews by Event Name", class: "form-control" %>
+    </div>
+    <%= submit_tag "Search", class: "btn btn-primary mb-3" %>
+  <% end %>
+<% end %>
+
+<%= link_to "New review", new_review_path %> |
+<%= link_to "Back to Home Page", home_index_path %>
+
+
+
+
+<table class="table table-striped">
+  <thead>
+  <tr>
+    <th scope="col">User Name</th>
+    <th scope="col">Event Name</th>
+    <th scope="col">Rating</th>
+    <th scope="col">Feedback</th>
+    <th scope="col">Edit</th>
+    <th scope="col">Delete</th>
+  </tr>
+  </thead>
+  <tbody>
+  <% @reviews.each do |review| %>
+    <tr>
+      <td class="align-middle"><%= review.user.name %></td>
+      <td class="align-middle"><%= review.event.name %></td>
+      <td class="align-middle"><%= review.rating %></td>
+      <td class="align-middle"><%= review.feedback %></td>
+      <td class="align-middle"><%= link_to 'Edit', edit_review_path(review.id) %></td>
+      <td class="align-middle"><%= button_to "Delete", review, method: :delete , class:"btn btn-danger"%></td>
+  <% end %>
+  </tr>
+  </tbody>
+</table>
+
+

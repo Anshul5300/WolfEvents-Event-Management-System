@@ -1,0 +1,38 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Tickets</h1>
+
+<%= link_to "New ticket", new_ticket_path %> |
+<%= link_to "Back to Home Page", home_index_path %>
+
+<table class="table table-striped">
+  <thead>
+  <tr>
+    <th scope="col">User Name</th>
+    <th scope="col">Event Name</th>
+    <th scope="col">Event Date</th>
+    <th scope="col">Room Id</th>
+    <th scope="col">Quantity</th>
+    <th scope="col">Confirmation Number</th>
+    <th scope="col">Ticket Price</th>
+    <th scope="col">Edit</th>
+    <th scope="col">Cancel</th>
+  </tr>
+  </thead>
+  <tbody>
+  <% @tickets.each do |ticket| %>
+    <tr>
+      <td class="align-middle"><%= ticket.user.name %></td>
+      <td class="align-middle"><%= ticket.event.name %></td>
+      <td class="align-middle"><%= ticket.event.date %></td>
+      <td class="align-middle"><%= ticket.room.id %></td>
+      <td class="align-middle"><%= ticket.quantity.nil? ? 1 : ticket.quantity %></td>
+      <td class="align-middle"><%= ticket.confirmation_number %></td>
+      <td class="align-middle"><%= ticket.event.price %></td>
+      <td class="align-middle"><%= link_to 'Edit', edit_ticket_path(ticket.id) %></td>
+      <td class="align-middle"><%= button_to "Delete", ticket, method: :delete , class:"btn btn-danger"%></td>
+  <% end %>
+  </tr>
+  </tbody>
+</table>
+
