@@ -46,48 +46,48 @@ Password: user123
 ### Sign-in/Sign-up
 Login using exisitng credentials or sign-up to create a new attendee account.
 
-<img width="1512" alt="image" src="https://media.github.ncsu.edu/user/30766/files/4cf33d51-6cea-47e8-98e9-6a2214394ee0">
+![image](https://github.com/user-attachments/assets/f9ea4d0f-bd7f-44e2-9d51-503fcaeab845)
 
 ---
 
 ### Rooms
 View existing rooms on the portal. Only admin can add new rooms.
 
-<img width="1512" alt="image" src="https://media.github.ncsu.edu/user/30766/files/85c52794-1850-4587-b037-fc6fd20d20dc">
+![image](https://github.com/user-attachments/assets/ce2daf3a-4d59-4071-9ed5-7b65529fed35)
 
 ---
 
 ### Events
 View existing events on the portal. Only admin can add new events. Use filters to view specific events.
 
-<img width="1512" alt="image" src="https://media.github.ncsu.edu/user/30766/files/708fc7bc-0369-424b-86b3-323a96ce79a8">
+![image](https://github.com/user-attachments/assets/8e659184-8775-45a5-a959-59c7423f40c7)
 
 ---
 
 ### Tickets
 Buy tickets for upcoming events on the portal. Option to buy more than one ticket. Price is calculated automatically.
 
-<img width="1512" alt="image" src="https://media.github.ncsu.edu/user/30766/files/e2c0ea9c-17b5-4d93-aa67-ee8ad430c97a">
+![image](https://github.com/user-attachments/assets/70919aa8-de0d-4483-9953-b12e84f5c3de)
 
 ---
 
 ### Reviews
 Add reviews for the events you have attended. Ability to view all reviews for all the events that have finished.
 
-<img width="1510" alt="image" src="https://media.github.ncsu.edu/user/30766/files/d5b7922b-251e-4268-a5d3-68a66ad8ab93">
+![image](https://github.com/user-attachments/assets/7f0db37f-fcb6-4690-ac75-f711e75fc00d)
 
 ---
 ### Edit Profile
 Edit any existing data we have about you on our system.
 
-<img width="1512" alt="image" src="https://media.github.ncsu.edu/user/30766/files/553c3ab9-b810-49b0-a446-da34deda0833">
+![image](https://github.com/user-attachments/assets/c3c33b2c-8b74-4d61-a737-60ee76ab15c5)
 
 ---
 
 ### Delete Account
 Unhappy with our system? You can delete your presence from our records. Admin cannot delete their account.
 
-<img width="1509" alt="image" src="https://media.github.ncsu.edu/user/30766/files/9d142337-dc9e-4541-af87-1cbbd8005ec4">
+![image](https://github.com/user-attachments/assets/feffcb90-7de7-4b49-a590-989a37510343)
 
 ---
 
